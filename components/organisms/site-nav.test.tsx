@@ -52,6 +52,25 @@ describe("SiteNav", () => {
     ).not.toHaveAttribute("aria-current");
   });
 
+  it("marks Speakers active in both the desktop nav and the mobile menu", async () => {
+    usePathname.mockReturnValue("/speakers");
+
+    render(<SiteNav />);
+    await userEvent.click(
+      screen.getByRole("button", { name: "Open menu", hidden: true }),
+    );
+
+    const links = screen.getAllByRole("link", {
+      name: "Speakers",
+      hidden: true,
+    });
+    expect(links).toHaveLength(2);
+    for (const link of links) {
+      expect(link).toHaveAttribute("href", "/en/speakers");
+      expect(link).toHaveAttribute("aria-current", "page");
+    }
+  });
+
   it("switches locale by navigating to the same route", async () => {
     usePathname.mockReturnValue("/sessions");
 
