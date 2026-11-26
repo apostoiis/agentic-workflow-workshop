@@ -16,5 +16,8 @@
   "SpeakersPage": {
     "title": "Ponentes",
     "subtitle": "Quién habla en React Alicante y cuándo."
+  },
+  "ThemeSwitcher": {
+    "label": "Cambiar tema"
   }
 }

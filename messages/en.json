@@ -16,5 +16,8 @@
   "SpeakersPage": {
     "title": "Speakers",
     "subtitle": "Who is speaking at React Alicante, and when."
+  },
+  "ThemeSwitcher": {
+    "label": "Change theme"
   }
 }

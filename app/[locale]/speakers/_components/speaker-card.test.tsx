@@ -34,6 +34,12 @@ describe("SpeakerCard", () => {
     ).toBeInTheDocument();
   });
 
+  it("marks session titles as English for screen readers", () => {
+    render(<SpeakerCard speaker={speaker} />);
+
+    expect(screen.getByText("Opening Keynote")).toHaveAttribute("lang", "en");
+  });
+
   it("links each session, with its start time, to its session page", () => {
     render(<SpeakerCard speaker={speaker} />);
 

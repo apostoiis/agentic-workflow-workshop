@@ -17,7 +17,14 @@ export function SpeakerCard({ speaker }: { speaker: Speaker }) {
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <Flex as="ul" direction="column" gap="3" listStyleType="none">
+        {/* Safari can drop list semantics when list-style is none. */}
+        <Flex
+          as="ul"
+          role="list"
+          direction="column"
+          gap="3"
+          listStyleType="none"
+        >
           {speaker.sessions.map((session) => (
             <Box as="li" key={session.id}>
               <Link href={`/sessions/${session.id}`}>
@@ -25,13 +32,15 @@ export function SpeakerCard({ speaker }: { speaker: Speaker }) {
                   as="span"
                   display="block"
                   fontSize="sm"
-                  transition="color 0.2s"
-                  _hover={{ color: "var(--accent-hex)" }}
+                  _hover={{ textDecoration: "underline" }}
                 >
-                  <Text as="span" display="block" color="var(--text-muted)">
+                  <Text as="span" display="block" color="var(--text-secondary)">
                     {session.startTime}
                   </Text>
-                  {session.title}
+                  {/* Titles come from the database in English only. */}
+                  <Box as="span" lang="en">
+                    {session.title}
+                  </Box>
                 </Box>
               </Link>
             </Box>
