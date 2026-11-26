@@ -1,6 +1,7 @@
 import { SpeakerCard } from "@/app/[locale]/speakers/_components/speaker-card";
 import { PageHeading } from "@/components/atoms/page-heading";
-import type { Speaker } from "@/types/speaker";
+import { fetchSessions } from "@/services/sessions";
+import { groupSessionsBySpeaker } from "@/utils/group-sessions-by-speaker";
 import { Flex, Grid } from "@chakra-ui/react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -13,8 +14,7 @@ export default async function SpeakersPage({
   setRequestLocale(locale);
   const t = await getTranslations("SpeakersPage");
 
-  // Placeholder until the data integration step wires in fetchSessions().
-  const speakers: Speaker[] = [];
+  const speakers = groupSessionsBySpeaker(await fetchSessions());
 
   return (
     <Flex direction="column" gap="8" flex="1" width="full">
